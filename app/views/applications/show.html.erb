@@ -1,26 +1,38 @@
 <h3><%= @application.name %></h3>
 <p><%= @application.street_address %><br>
 <%= @application.city %>, <%= @application.state%> <%= @application.zip_code%><br>
-Pets I want to Adopt: <%= @application.pets.all.each do |pet| %>
+Pets I want to Adopt: <% @application.pets.each do |pet| %>
 <%= pet.name %>
 <% end %><br>
+Description: <%= @application.description%><br>
 Application Status: <%= @application.application_status%>
-
 <hr>
 
-<h4>Add a Pet to this Application</h4>
+<%if @application.application_status == "In Progress" %>
+  <h4>Add a Pet to this Application</h4>
 
-<%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
-  <%= f.label :search %>
-  <%= f.text_field :search %>
-  <%= f.submit "Search" %>
-<% end %>
+  <%= form_with url: "/applications/#{@application.id}", method: :get, local: true do |f| %>
+    <%= f.label :search %>
+    <%= f.text_field :search %>
+    <%= f.submit "Search" %>
+  <% end %>
 
-<%if !@pets.nil?%>
-  <%@pets.each do |pet|%>
-    <section id="application_1-<%=pet.id%>">
-      <%= pet.name %>
-      <%= link_to "Adopt this Pet", "/pets/#{pet.id}/applications/#{@application.id}", method: :get%><br>
-    </section>
+  <%if !@pets.nil? %>
+    <%@pets.each do |pet|%>
+      <section id="application_1-<%=pet.id%>">
+        <%= pet.name %>
+        <%= link_to "Adopt this Pet", "/pets/#{pet.id}/applications/#{@application.id}", method: :get%><br>
+      </section>
+    <%end%>
+  <%end%>
+
+  <%if @application.pets.empty? == false %>
+    <h3>Submit My Application</h3>
+    <%= form_with url: "/applications/#{@application.id}", method: :patch, local: true do |f| %>
+      <%= "Why would I be a great pet parent:" %>
+      <%= f.text_field :description %>
+      <%= f.submit "Submit" %>
+      <%@application.update_status("Pending")%>
+    <%end%>
   <%end%>
 <%end%>
