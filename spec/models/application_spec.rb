@@ -12,7 +12,7 @@ RSpec.describe Application, type: :model do
     it { should validate_presence_of(:city) }
     it { should validate_presence_of(:state) }
     it { should validate_numericality_of(:zip_code) }
-    it { should validate_presence_of(:description) }
+    # it { should validate_presence_of(:description) }
   end
 
   describe 'methods' do
@@ -36,7 +36,32 @@ RSpec.describe Application, type: :model do
 
       application_1.app_status
 
-      expect(application_1.application_status).to eq("In Progress")                              
+      expect(application_1.application_status).to eq("In Progress")
+    end
+
+    it 'should update attribute status' do
+      shelter_1 = Shelter.create!(name: "Dumb Friends League",
+                                  rank: 2,
+                                  city: "Honolulu",
+                                  foster_program: true)
+
+      pet_1 = shelter_1.pets.create!(name: "Mochi",
+                          adoptable: true,
+                          age: 2,
+                          breed: "American Shorthair")
+
+      application_1 = Application.create!(name: "Mary Tanaka",
+                                          street_address: "123 Kapiolani Blvd.",
+                                          city: "Honolulu",
+                                          state: "HI",
+                                          zip_code: "98684",
+                                          description: "I'm a pet lover!")
+
+      application_1.app_status
+      expect(application_1.application_status).to eq("In Progress")
+
+      application_1.update_status("Pending")
+      expect(application_1.application_status).to eq("Pending")
     end
   end
 end

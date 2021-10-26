@@ -11,7 +11,6 @@ RSpec.describe "the Application new page" do
       expect(find('form')).to have_content('City')
       expect(find('form')).to have_content('State')
       expect(find('form')).to have_content('Zip code')
-      expect(find('form')).to have_content('Description')
     end
   end
 
@@ -38,7 +37,6 @@ RSpec.describe "the Application new page" do
         fill_in "city", with: "Honolulu"
         fill_in "state", with: "HI"
         fill_in "zip_code", with: "98684"
-        fill_in "description", with: "I love cats!"
         click_button "Save"
 
         expect(page).to have_content("Mary Tanaka")
@@ -54,7 +52,7 @@ RSpec.describe "the Application new page" do
 
         fill_in 'City', with: 'Denver'
 
-        expect(page).to have_content("Error: Name can't be blank, Street address can't be blank, City can't be blank, State can't be blank, Zip code can't be blank, Zip code is not a number, Description can't be blank")
+        expect(page).to have_content("Error: Name can't be blank, Street address can't be blank, City can't be blank, State can't be blank, Zip code can't be blank, Zip code is not a number")
         expect(page).to have_current_path('/applications/new')
       end
     end
