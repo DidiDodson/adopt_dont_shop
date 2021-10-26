@@ -60,6 +60,18 @@ RSpec.describe "the Application show page" do
     expect(page).to have_content(@pet_3.name)
   end
 
+  it "should accept case-insensitive input and return pet" do
+    visit "/applications/#{@application_1.id}"
+
+    expect(page).to have_content("Add a Pet to this Application")
+
+    fill_in 'search', with: "mocH"
+    click_on("Search")
+
+    expect(page).to have_content(@pet_1.name)
+    expect(page).to have_content(@pet_3.name)
+  end
+
   it "should show a link to adopt" do
     visit "/applications/#{@application_1.id}"
 
