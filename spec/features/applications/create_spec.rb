@@ -53,7 +53,7 @@ RSpec.describe "the Application new page" do
         fill_in 'City', with: 'Denver'
 
         expect(page).to have_content("Error: Name can't be blank, Street address can't be blank, City can't be blank, State can't be blank, Zip code can't be blank, Zip code is not a number")
-        expect(page).to have_current_path('/applications/new')
+        expect(page).to have_current_path('/applications')
       end
     end
   end

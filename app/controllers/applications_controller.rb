@@ -12,8 +12,8 @@ class ApplicationsController < ApplicationController
       if @application.save
         redirect_to "/applications/#{@application.id}"
       else
-        redirect_to '/applications/new'
         flash[:alert] = "Error: #{error_message(@application.errors)}"
+        render :new
       end
   end
 
@@ -21,14 +21,17 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
     @application.app_status
 
-    if @application.application_status == "In Progress"
-
-      if params[:search].present?
-        @pets = Pet.search(params[:search])
-      end
-    else
-      flash[:alert] = "Please submit a new application."
+    if params[:search].present?
+      @pets = Pet.search(params[:search])
     end
+  end
+
+  def update
+    @application = Application.find(params[:id])
+    @application.update(application_params)
+    @application.save
+
+   redirect_to "/applications/#{@application.id}"
   end
 
   private
