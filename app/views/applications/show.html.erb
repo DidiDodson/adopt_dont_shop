@@ -1,11 +1,9 @@
 <h3><%= @application.name %></h3>
 <p><%= @application.street_address %><br>
 <%= @application.city %>, <%= @application.state%> <%= @application.zip_code%><br>
-Description: <%= @application.description%><br>
 Pets I want to Adopt: <%= @application.pets.all.each do |pet| %>
 <%= pet.name %>
-<% end %>
-<br>
+<% end %><br>
 Application Status: <%= @application.application_status%>
 
 <hr>

@@ -26,8 +26,8 @@ class ApplicationsController < ApplicationController
       if params[:search].present?
         @pets = Pet.search(params[:search])
       end
-    # else
-    #   flash[:alert] = "Please submit a new application."
+    else
+      flash[:alert] = "Please submit a new application."
     end
   end
 

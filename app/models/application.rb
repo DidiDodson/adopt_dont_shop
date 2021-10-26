@@ -7,7 +7,7 @@ class Application < ApplicationRecord
   validates :city, presence: true
   validates :state, presence: true
   validates :zip_code, presence: true, numericality: true
-  validates :description, presence: true
+  # validates :description, presence: true
 
   def update_status(status)
     self.update_attribute(:application_status, status)
@@ -16,8 +16,4 @@ class Application < ApplicationRecord
   def app_status
     self.application_status = "In Progress" unless self.application_status == "Pending" || self.application_status == "Accepted" || self.application_status == "Rejected"
   end
-
-  # def add_pet(pet)
-  #   self.pets << pet
-  # end
 end
