@@ -2,8 +2,11 @@
 <p><%= @application.street_address %><br>
 <%= @application.city %>, <%= @application.state%> <%= @application.zip_code%><br>
 Description: <%= @application.description%><br>
-Pets I want to Adopt: <%= @application.pet_names%><br>
-Application Status: In Progress <%= @application.application_status%>
+Pets I want to Adopt: <%= @application.pets.all.each do |pet| %>
+<%= pet.name %>
+<% end %>
+<br>
+Application Status: <%= @application.application_status%>
 
 <hr>
 
@@ -17,12 +20,9 @@ Application Status: In Progress <%= @application.application_status%>
 
 <%if !@pets.nil?%>
   <%@pets.each do |pet|%>
-    <%= pet.name %> <%= link_to "Adopt this Pet", "/applications/#{@application.id}"%><br>
+    <section id="application_1-<%=pet.id%>">
+      <%= pet.name %>
+      <%= link_to "Adopt this Pet", "/pets/#{pet.id}/applications/#{@application.id}", method: :get%><br>
+    </section>
   <%end%>
-<% elsif @pets.nil?%>
-  <% flash.each do |type, msg| %>
-  <div>
-    <%= msg %>
-  </div>
-  <% end %>
 <%end%>

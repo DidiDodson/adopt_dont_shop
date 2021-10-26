@@ -19,12 +19,15 @@ class ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:id])
+    @application.app_status
 
-    if params[:search].present?
-      # (@application.application_status == "In Progress") &&
-      @pets = Pet.search(params[:search])
+    if @application.application_status == "In Progress"
+
+      if params[:search].present?
+        @pets = Pet.search(params[:search])
+      end
     else
-      flash.alert = "Error: no pets match your search"
+      flash[:alert] = "Please submit a new application."
     end
   end
 
