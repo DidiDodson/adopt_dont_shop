@@ -26,7 +26,6 @@ class SheltersController < ApplicationController
   end
 
   def new
-    admin = Admin.create!
   end
 
   def create
