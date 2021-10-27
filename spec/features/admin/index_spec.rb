@@ -39,7 +39,7 @@ RSpec.describe 'admin index' do
     expect(shelter_2.name).to appear_before(shelter_1.name)
   end
 
-  xit 'shows shelters with Pending applications' do
+  it 'shows shelters with Pending applications' do
     admin = Admin.create
     shelter_1 = admin.shelters.create!(name: "Dumb Friends League",
                                 rank: 2,
@@ -78,7 +78,9 @@ RSpec.describe 'admin index' do
 
     visit "/admin/shelters"
 
-    expect(page).to have_content(shelter_1.name)
-    expect(page).to_not have_content(shelter_2.name)
+    within("#admins-#{shelter_1.id}") do
+      expect(page).to have_content(shelter_1.name)
+      expect(page).to_not have_content(shelter_2.name)
+    end
   end
 end

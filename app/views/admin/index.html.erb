@@ -12,14 +12,15 @@
 <% end %>
 
 <h2>Shelters with Pending Applications</h2>
-<% @admins.each do |admin|%>
-  <% admin.shelters.each do |shelter| %>
-    <% shelter.pets.each do |pet| %>
-      <% pet.applications.each do |application| %>
-        <% if application.application_status == "Pending"%>
-          <%= shelter.name %><br>
+  <% @admins.each do |admin|%>
+    <% admin.shelters.each do |shelter| %>
+    <section id="admins-<%= shelter.id %>">
+      <% shelter.pets.each do |pet| %>
+        <% pet.applications.each do |application| %>
+          <% if application.application_status == "Pending"%>
+            <%= shelter.name %><br>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
+    </section><% end %>
   <% end %>
-<% end %>
