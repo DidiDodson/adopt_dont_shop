@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'pet creation' do
   before(:each) do
-    @shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+    @admin = Admin.create
+    @shelter = @admin.shelters.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
   end
 
   describe 'the pet new' do

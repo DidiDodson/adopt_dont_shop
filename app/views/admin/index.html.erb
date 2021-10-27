@@ -1,0 +1,25 @@
+<%= form_with url: "/admin/shelters", method: :post, local: true do |f| %>
+  <%= f.submit "Add New Admin"%>
+<% end %>
+
+<% @admins.each do |admin| %>
+  <p>Admin ID: <%= admin.id %></p>
+<% end %>
+
+<h2>All Shelters</h2>
+<% @us_10.each do |shelter|%>
+  <%= shelter.name %><br>
+<% end %>
+
+<h2>Shelters with Pending Applications</h2>
+<% @admins.each do |admin|%>
+  <% admin.shelters.each do |shelter| %>
+    <% shelter.pets.each do |pet| %>
+      <% pet.applications.each do |application| %>
+        <% if application.application_status == "Pending"%>
+          <%= shelter.name %><br>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

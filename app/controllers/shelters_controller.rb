@@ -26,10 +26,12 @@ class SheltersController < ApplicationController
   end
 
   def new
+    admin = Admin.create!
   end
 
   def create
-    shelter = Shelter.new(shelter_params)
+    admin = Admin.create!
+    shelter = admin.shelters.new(shelter_params)
 
     if shelter.save
       redirect_to '/shelters'
@@ -62,6 +64,6 @@ class SheltersController < ApplicationController
   private
 
   def shelter_params
-    params.permit(:id, :name, :city, :foster_program, :rank)
+    params.permit(:id, :name, :city, :foster_program, :rank, :admin_id)
   end
 end
