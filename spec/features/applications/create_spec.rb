@@ -17,13 +17,6 @@ RSpec.describe "the Application new page" do
   describe 'the application create' do
     context 'given valid data' do
       it 'creates the application' do
-        application_1 = Application.create(name: "Mary Tanaka",
-                                        street_address: "123 Kapiolani Blvd.",
-                                        city: "Honolulu",
-                                        state: "HI",
-                                        zip_code: "98684",
-                                        description: "I love cats!")
-
         visit '/pets'
 
         expect(page).to have_link("Start an Application")

@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe 'the shelter update' do
   it "shows the shelter edit form" do
-    shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+    admin = Admin.create
+    shelter_1 = admin.shelters.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
 
-    visit "/shelters/#{shelter.id}/edit"
+    visit "/shelters/#{shelter_1.id}/edit"
 
     expect(find('form')).to have_content('Name')
     expect(find('form')).to have_content('City')
@@ -14,7 +15,8 @@ RSpec.describe 'the shelter update' do
 
   context "given valid data" do
     it "submits the edit form and updates the shelter" do
-      shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+      admin = Admin.create
+      shelter = admin.shelters.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
 
       visit "/shelters/#{shelter.id}/edit"
 
@@ -32,7 +34,8 @@ RSpec.describe 'the shelter update' do
 
   context "given invalid data" do
     it 're-renders the edit form' do
-      shelter = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
+      admin = Admin.create
+      shelter = admin.shelters.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
 
       visit "/shelters/#{shelter.id}/edit"
 

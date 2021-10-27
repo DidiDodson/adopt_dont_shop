@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe 'applications index' do
   it 'shows all applications' do
-    shelter_1 = Shelter.create!(name: "Dumb Friends League",
+    admin = Admin.create
+    shelter_1 = admin.shelters.create!(name: "Dumb Friends League",
                                 rank: 2,
                                 city: "Honolulu",
                                 foster_program: true)

@@ -17,7 +17,8 @@ RSpec.describe Application, type: :model do
 
   describe 'methods' do
     it 'should set default application status' do
-      shelter_1 = Shelter.create!(name: "Dumb Friends League",
+      admin = Admin.create
+      shelter_1 = admin.shelters.create!(name: "Dumb Friends League",
                                   rank: 2,
                                   city: "Honolulu",
                                   foster_program: true)
@@ -40,7 +41,8 @@ RSpec.describe Application, type: :model do
     end
 
     it 'should update attribute status' do
-      shelter_1 = Shelter.create!(name: "Dumb Friends League",
+      admin = Admin.create
+      shelter_1 = admin.shelters.create!(name: "Dumb Friends League",
                                   rank: 2,
                                   city: "Honolulu",
                                   foster_program: true)
